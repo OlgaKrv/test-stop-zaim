@@ -1,0 +1,171 @@
+{
+  "name": "tea-shop",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "serve": "vue-cli-service serve",
+    "build": "vue-cli-service build",
+    "lint": "vue-cli-service lint"
+  },
+  "dependencies": {
+    "autoprefixer": "^10",
+    "core-js": "^3.8.3",
+    "postcss": "^8",
+    "tailwindcss": "^3",
+    "vue": "^2.6.14",
+    "vuex": "^3.6.2"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.12.16",
+    "@babel/eslint-parser": "^7.12.16",
+    "@tailwindcss/forms": "^0.5.3",
+    "@vue/cli-plugin-babel": "~5.0.0",
+    "@vue/cli-plugin-eslint": "~5.0.0",
+    "@vue/cli-service": "~5.0.0",
+    "eslint": "^7.32.0",
+    "eslint-config-airbnb": "^19.0.4",
+    "eslint-config-prettier": "^8.6.0",
+    "eslint-import-resolver-nuxt": "^1.0.1",
+    "eslint-plugin-prettier": "^4.2.1",
+    "eslint-plugin-vue": "^8.0.3",
+    "prettier": "^2.8.4",
+    "tailwindcss": "^3.2.6",
+    "vue-cli-plugin-tailwind": "~3.0.0",
+    "vue-router": "^3.6.5",
+    "vue-template-compiler": "^2.6.14"
+  },
+  "eslintConfig": {
+    "root": true,
+    "env": {
+      "node": true
+    },
+    "extends": [
+      "airbnb",
+      "plugin:prettier/recommended",
+      "prettier",
+      "eslint-config-prettier",
+      "plugin:vue/base",
+      "eslint:recommended",
+      "plugin:vue/essential"
+    ],
+    "parserOptions": {
+      "parser": "@babel/eslint-parser",
+      "ecmaVersion": 12,
+      "sourceType": "module"
+    },
+    "plugins": [
+      "vue",
+      "prettier"
+    ],
+    "rules": {
+      "vue/multi-word-component-names": 0,
+      "vue/component-name-in-template-casing": [
+        "error",
+        "kebab-case",
+        {
+          "registeredComponentsOnly": true
+        }
+      ],
+      "vue/no-irregular-whitespace": [
+        "error",
+        {
+          "skipStrings": true,
+          "skipComments": false,
+          "skipRegExps": false,
+          "skipTemplates": false,
+          "skipHTMLAttributeValues": false,
+          "skipHTMLTextContents": false
+        }
+      ],
+      "vue/no-dupe-keys": [
+        "error",
+        {
+          "groups": []
+        }
+      ],
+      "prettier/prettier": [
+        "error",
+        {
+          "endOfLine": "auto",
+          "useTabs": false,
+          "semi": false,
+          "singleQuote": true,
+          "trailingComma": "all"
+        }
+      ],
+      "no-param-reassign": "off",
+      "no-console": "error",
+      "no-debugger": "error",
+      "no-plusplus": "off",
+      "no-mixed-operators": [
+        "error",
+        {
+          "groups": [
+            [
+              "+",
+              "-",
+              "*",
+              "/",
+              "%",
+              "**"
+            ],
+            [
+              "&",
+              "|",
+              "^",
+              "~",
+              "<<",
+              ">>",
+              ">>>"
+            ],
+            [
+              "==",
+              "!=",
+              "===",
+              "!==",
+              ">",
+              ">=",
+              "<",
+              "<="
+            ],
+            [
+              "&&",
+              "||"
+            ],
+            [
+              "in",
+              "instanceof"
+            ]
+          ],
+          "allowSamePrecedence": true
+        }
+      ],
+      "no-bitwise": [
+        "error",
+        {
+          "allow": [
+            "~"
+          ]
+        }
+      ]
+    },
+    "settings": {
+      "import/resolver": {
+        "nuxt": {
+          "extensions": [
+            ".js",
+            ".vue"
+          ]
+        }
+      }
+    }
+  },
+  "browserslist": [
+    "> 1%",
+    "last 2 versions",
+    "not dead"
+  ],
+  "eslintIgnore": [
+    "*.json"
+  ]
+}
