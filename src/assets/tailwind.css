@@ -1,3 +1,73 @@
 @import 'tailwindcss/base';
 @import 'tailwindcss/components';
 @import 'tailwindcss/utilities';
+
+@layer components {
+  .wrapper_content {
+    @apply flex flex-col my-0 mx-auto;
+  }
+
+  .wrapper_content {
+    @apply flex flex-col min-h-screen;
+  }
+
+  .wrapper-content--fixed {
+    @apply mt-20;
+  }
+
+  .project_wrapper {
+    @apply flex flex-col min-h-screen my-0 mx-auto;
+  }
+
+  .navbar {
+    @apply fixed top-0 inset-x-0 z-20 px-5 py-3 bg-slate-200 shadow-md shadow-black;
+  }
+
+  .container {
+    @apply w-full flex-none relative my-0 mx-auto;
+  }
+
+  .logo {
+    @apply text-xl font-bold text-slate-700;
+  }
+
+  .navbar_content {
+    @apply flex items-center justify-between;
+  }
+  
+  .navbar_list {
+    @apply flex items-center justify-center;
+  }
+  
+  .navbar_item {
+    @apply mr-8 cursor-pointer;
+  }
+  
+  .navbar_link {
+    @apply block text-slate-400 font-bold;
+  }
+  
+  .navbar_link.router-link-exact-active {
+    @apply text-slate-700 font-bold;
+  }
+
+  .title {
+    @apply mb-8 text-2xl font-bold text-slate-700;
+  }
+
+  .link {
+    @apply text-slate-600 cursor-pointer border-solid border-slate-400 rounded-sm;
+  }
+
+  .product_wrapper {
+    @apply flex justify-start items-center;
+  }
+
+  .product_slider {
+    @apply max-w-sm text-center;
+  }
+
+  .product_content {
+    @apply max-w-2xl text-center;
+  }
+}
