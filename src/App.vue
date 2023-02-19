@@ -4,7 +4,7 @@
 			<div class="navbar">
 				<div class="container">
 					<div class="navbar_content">
-						<div class="logo">Вовод оплат</div>
+						<div class="logo">Вывод оплат</div>
 						<ul class="navbar_list">
 							<li class="navbar_item" v-for="link in links" :key="link.title">
 								<router-link

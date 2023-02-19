@@ -3,6 +3,10 @@
 @import 'tailwindcss/utilities';
 
 @layer components {
+  button {
+    @apply py-1 mb-3 rounded-md;
+  }
+
   .wrapper_content {
     @apply flex flex-col my-0 mx-auto;
   }
@@ -25,6 +29,10 @@
 
   .container {
     @apply w-full flex-none relative my-0 mx-auto;
+  }
+
+  .title_text {
+    @apply m-0 text-xl font-bold;
   }
 
   .logo {

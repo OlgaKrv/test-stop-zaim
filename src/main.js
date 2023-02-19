@@ -2,6 +2,7 @@
 import Vue from "vue"
 import App from "./App.vue"
 import './assets/tailwind.css'
+import 'material-design-icons-iconfont'
 
 import router from "./router/index.js"
 import store from "./store"
