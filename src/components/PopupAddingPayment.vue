@@ -121,6 +121,12 @@ export default {
 			return this.newPayment[category] ? '' : 'bg-red-200 border-red-600'
 		},
 		closePopup() {
+			this.newPayment.client = ''
+			this.newPayment.contract = ''
+			this.newPayment.date = ''
+			this.newPayment.summ = ''
+			this.newPayment.status_id = 0
+			this.newPayment.type_id = 0
 			this.$emit('closePopup')
 		},
 		checkValidityPayment() {
