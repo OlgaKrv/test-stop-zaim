@@ -3,34 +3,7 @@
 		<popupAddingPayment
 			v-if="isPopupAddingVisible"
 			@closePopup="closePopupAdding"
-		>
-			<div>
-				<div class="flex justify-end items-center">
-					<label class="mr-4">Клиент:</label>
-					<input type="text" placeholder="row.client" />
-				</div>
-				<div class="flex justify-end items-center">
-					<label class="mr-4">Договор:</label>
-					<input type="text" placeholder="row.contract" />
-				</div>
-				<div class="flex justify-end items-center">
-					<label class="mr-4">Тип оплаты:</label>
-					<input type="text" placeholder="row.type_id" />
-				</div>
-				<div class="flex justify-end items-center">
-					<label class="mr-4">Дата оплаты:</label>
-					<input type="text" placeholder="row.date" />
-				</div>
-				<div class="flex justify-end items-center">
-					<label class="mr-4">Сумма оплаты:</label>
-					<input type="text" placeholder="row.summ" />
-				</div>
-				<div class="flex justify-end items-center">
-					<label class="mr-4">Статус:</label>
-					<input type="text" placeholder="row.status_id" />
-				</div>
-			</div>
-		</popupAddingPayment>
+		></popupAddingPayment>
 		<section>
 			<div class="container">
 				<p class="title_text">Список платежей</p>
@@ -40,22 +13,57 @@
 				<table>
 					<thead>
 						<tr>
-							<th>Клиент</th>
-							<th>Договор</th>
-							<th>Тип платежа</th>
-							<th>Дата</th>
-							<th>Сумма (руб)</th>
-							<th>Источник платежа</th>
-							<th>Статус</th>
+							<th>
+								Клиент
+								<i class="material-icons" @click="sortByName('client')">
+									unfold_more
+								</i>
+							</th>
+							<th>
+								Договор
+								<i class="material-icons" @click="sortByName('contract')">
+									unfold_more
+								</i>
+							</th>
+							<th>
+								Тип платежа
+								<i class="material-icons" @click="sortByTypeId('type_id')">
+									unfold_more
+								</i>
+							</th>
+							<th>
+								Дата
+								<i class="material-icons" @click="sortByName('date')">
+									unfold_more
+								</i>
+							</th>
+							<th>
+								Сумма (руб)
+								<i class="material-icons" @click="sortByName('summ')">
+									unfold_more
+								</i>
+							</th>
+							<th>
+								Источник платежа
+								<i class="material-icons" @click="sortByTypeId('source_id')">
+									unfold_more
+								</i>
+							</th>
+							<th>
+								Статус
+								<i class="material-icons" @click="sortByTypeId('status_id')">
+									unfold_more
+								</i>
+							</th>
 						</tr>
 					</thead>
 					<tbody>
-						<tr v-for="row in paymentsData" :key="row.id">
+						<tr v-for="row in TABLE_DATA" :key="row.id">
 							<td>{{ row.client }}</td>
 							<td>{{ row.contract }}</td>
 							<td>
 								{{
-									statusIdType.types.find((idType) => idType.id === row.type_id)
+									DATA_ID_TYPE.types.find((idType) => idType.id === row.type_id)
 										.title
 								}}
 							</td>
@@ -63,14 +71,19 @@
 							<td>{{ row.summ }}</td>
 							<td>
 								{{
-									sourceIdType.find((idType) => idType.id === row.source_id)
+									SOURCE_ID_TYPE.find((idType) => idType.id === row.source_id)
 										.title
 								}}
 							</td>
 							<td>
-								<span class="px-2 bg-orange-500 rounded-md text-white">
+								<span
+									class="px-2 rounded-md text-white"
+									:class="
+										statusColor.find((id) => id.id === row.status_id).color
+									"
+								>
 									{{
-										statusIdType.statuses.find(
+										DATA_ID_TYPE.statuses.find(
 											(idType) => idType.id === row.status_id,
 										).title
 									}}
@@ -79,16 +92,16 @@
 						</tr>
 					</tbody>
 				</table>
-				<!-- <div>{{ paymentsData }}</div>
-				<div>{{ sourceIdType }}</div>
-				<div>{{ statusIdType }}</div> -->
+				<div>{{ TABLE_DATA }}</div>
+				<div>{{ SOURCE_ID_TYPE }}</div>
+				<div>{{ DATA_ID_TYPE }}</div>
 			</div>
 		</section>
 	</div>
 </template>
 
 <script>
-import axios from 'axios'
+import { mapActions, mapGetters } from 'vuex'
 import popupAddingPayment from '../components/PopupAddingPayment.vue'
 
 export default {
@@ -97,10 +110,6 @@ export default {
 	},
 	data() {
 		return {
-			tableData: null,
-			paymentsData: null,
-			sourceIdType: null,
-			statusIdType: null,
 			isPopupAddingVisible: false,
 			statusColor: [
 				{ id: 1, color: 'bg-slate-500' },
@@ -109,45 +118,52 @@ export default {
 			],
 		}
 	},
-	created() {
-		this.tableData = this.$store.getters.tableData
+	computed: {
+		...mapGetters(['TABLE_DATA', 'SOURCE_ID_TYPE', 'DATA_ID_TYPE']),
 	},
 	methods: {
+		...mapActions([
+			'GET_TABLE_DATA_FROM_API',
+			'GET_SOURCE_ID_TYPE_FROM_API',
+			'GET_DATA_ID_TYPE_FROM_API',
+		]),
 		showPopupAdding() {
 			this.isPopupAddingVisible = true
 		},
 		closePopupAdding() {
 			this.isPopupAddingVisible = false
 		},
+		sortByName(name) {
+			this.TABLE_DATA.sort((a, b) => a[name].localeCompare(b[name]))
+		},
+		sortByTypeId(typeId) {
+			this.TABLE_DATA.sort((a, b) => a[typeId] - b[typeId])
+		},
 	},
 	mounted() {
-		axios
-			.get('https://payments-test.stop-zaim.ru/public_html/payments')
-			.then((response) => {
-				this.paymentsData = response.data
-			})
-		axios
-			.get('https://payments-test.stop-zaim.ru/public_html/sources')
-			.then((response) => {
-				this.sourceIdType = response.data
-			})
-		axios
-			.get('https://payments-test.stop-zaim.ru/public_html/form_tss')
-			.then((response) => {
-				this.statusIdType = response.data
-			})
+		this.GET_TABLE_DATA_FROM_API()
+		this.GET_SOURCE_ID_TYPE_FROM_API()
+		this.GET_DATA_ID_TYPE_FROM_API()
 	},
 }
 </script>
 
 <style>
-th {
-	width: 300px;
+th,
+td {
+	width: 13rem;
+	display: flex;
+	justify-content: center;
+	align-items: center;
 }
 tr {
+	display: flex;
 	height: 4rem;
 	text-align: center;
 	border-top: 2px solid #000;
 	border-bottom: 2px solid #000;
+}
+i {
+	cursor: pointer;
 }
 </style>
