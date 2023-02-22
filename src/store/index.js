@@ -1,14 +1,10 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
 import axios from 'axios'
-import paymentAgreements from './paymentAgreements'
 
 Vue.use(Vuex)
 
 export default new Vuex.Store({
-	modules: {
-		paymentAgreements,
-	},
 	state: {
 		tableData: [],
 		sourceIdType: [],

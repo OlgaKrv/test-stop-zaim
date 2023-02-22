@@ -47,7 +47,7 @@
 					<input
 						class="input_field"
 						:class="changeInputСolor('date')"
-						type="text"
+						type="date"
 						v-model="newPayment.date"
 					/>
 				</div>
@@ -113,7 +113,7 @@ export default {
 		...mapGetters(['TABLE_DATA', 'DATA_ID_TYPE']),
 	},
 	methods: {
-		...mapActions(['GET_DATA_ID_TYPE_FROM_API']),
+		...mapActions(['GET_TABLE_DATA_FROM_API', 'GET_DATA_ID_TYPE_FROM_API']),
 		changeInputСolor(category) {
 			if (this.isValidNewPayment) {
 				return ''
@@ -139,23 +139,20 @@ export default {
 			this.checkValidityPayment()
 			if (this.isValidNewPayment) {
 				axios
-					// .delete('https://payments-test.stop-zaim.ru/public_html/payments/', {
-					// 	date: '2023-02-14',
-					// })
 					.post('https://payments-test.stop-zaim.ru/public_html/payments', {
-						id: this.TABLE_DATA.length + 1,
 						client: this.newPayment.client,
 						contract: this.newPayment.contract,
 						type_id: this.newPayment.type_id,
 						date: this.newPayment.date,
 						summ: this.newPayment.summ,
-						source_id: this.newPayment.source_id,
+						source_id: 2,
 						status_id: this.newPayment.status_id,
 					})
 					.then((response) => {
 						return response.data
 					})
 			}
+			this.GET_TABLE_DATA_FROM_API()
 		},
 	},
 	mounted() {
