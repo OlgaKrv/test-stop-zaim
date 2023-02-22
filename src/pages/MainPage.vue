@@ -1,9 +1,11 @@
 <template>
 	<div class="wrapper_content wrapper-content--fixed">
-		<popupAddingPayment
-			v-if="isPopupAddingVisible"
-			@closePopup="closePopupAdding"
-		></popupAddingPayment>
+		<transition name="popup_animated">
+			<popupAddingPayment
+				v-if="isPopupAddingVisible"
+				@closePopup="closePopupAdding"
+			></popupAddingPayment>
+		</transition>
 		<section>
 			<div class="container">
 				<p class="title_text">Список платежей</p>
@@ -214,5 +216,15 @@ i {
 }
 .payment_filtering_by_data {
 	display: block;
+}
+
+.popup_animated-enter-active,
+.popup_animated-leave-active {
+	transition: opacity 0.5s ease;
+	transition-delay: 0.5s !important;
+}
+.popup_animated-enter-from,
+.popup_animated-leave-to {
+	opacity: 0.2;
 }
 </style>
